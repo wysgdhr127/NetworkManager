@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="policy" namespace="/policy" extends="json-default">
+		<!-- 进入查询列表 -->
+		<action name="InSearch" class="PolicyAction" method="inSearch">
+			<result name="success" type="redirectAction">
+				<param name="actionName">Search</param>
+			</result>
+		</action>
+
+		<!-- 查询列表 -->
+		<action name="Search" class="PolicyAction" method="search">
+			<result name="success">/jsp/PolicyPage/list.jsp</result>
+		</action>
+
+		<action name="InConfig" class="PolicyAction" method="inConfig">
+			<result name="success">/jsp/PolicyPage/config.jsp</result>
+		</action>
+
+		<!-- 查询列表 -->
+		<action name="Config" class="PolicyAction" method="search">
+			<result name="success">/jsp/PolicyPage/config.jsp</result>
+		</action>
+
+		<!-- ajax次查询 -->
+		<action name="AjaxSearch" class="PolicyAction" method="ajaxSearch">
+			<result type="json">
+				<param name="root">resultList</param>
+			</result>
+		</action>
+
+
+
+
+		<!-- 添加列表 -->
+		<action name="InAdd" class="PolicyAction" method="inAdd">
+			<result name="success">/jsp/PolicyPage/add.jsp</result>
+		</action>
+
+		<action name="Add" class="PolicyAction" method="add">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/policy</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 修改列表 -->
+		<action name="InUpdate" class="PolicyAction" method="inUpdate">
+			<result name="success">/jsp/PolicyPage/update.jsp</result>
+		</action>
+
+		<action name="Update" class="PolicyAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/policy</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 删除列表 -->
+		<action name="Delete" class="PolicyAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/policy</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 重发列表 -->
+		<action name="reSend" class="PolicyAction" method="reSend">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/policy</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+
+
+	</package>
+</struts>
+

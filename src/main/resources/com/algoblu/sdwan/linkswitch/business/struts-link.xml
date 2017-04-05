@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="link" namespace="/link" extends="json-default">
+		<!-- 进入查询列表 -->
+		<action name="InSearch" class="LinkAction" method="inSearch">
+			<result name="success" type="redirectAction">
+				<param name="actionName">Search</param>
+			</result>
+		</action>
+
+		<!-- 查询列表 -->
+		<action name="Search" class="LinkAction" method="search">
+			<result name="success">/jsp/LinkPage/list.jsp</result>
+		</action>
+
+		<!-- ajax次查询 -->
+		<action name="AjaxSearch" class="LinkAction" method="ajaxSearch">
+			<result type="json">
+				<param name="root">resultList</param>
+			</result>
+		</action>
+
+
+
+
+		<!-- 添加列表 -->
+		<action name="InAdd" class="LinkAction" method="inAdd">
+			<result name="success">/jsp/LinkPage/add.jsp</result>
+
+		</action>
+		
+		<action name="Add" class="LinkAction" method="add">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/link</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 修改列表 -->
+		<action name="InUpdate" class="LinkAction" method="inUpdate">
+			<result name="success">/jsp/LinkPage/update.jsp</result>
+		</action>
+		
+		<action name="Update" class="LinkAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/link</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 删除列表 -->
+		<action name="Delete" class="LinkAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/link</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 重发列表 -->
+		<action name="reSend" class="LinkAction" method="reSend">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/link</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+
+		<action name="UpdateLinkInfo" class="LinkAction" method="updateLinkInfo">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/link</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+	</package>
+</struts>
+

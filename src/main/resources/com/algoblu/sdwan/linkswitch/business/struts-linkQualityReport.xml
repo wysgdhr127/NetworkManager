@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="linkQualityReport" namespace="/linkQualityReport"
+		extends="json-default">
+		<!-- 进入查询列表 -->
+		<action name="InSearch" class="LinkQualityReportAction" method="inSearch">
+			<result name="success" type="redirectAction">
+				<param name="actionName">Search</param>
+			</result>
+		</action>
+
+		<!-- 查询列表 -->
+		<action name="Search" class="LinkQualityReportAction" method="search">
+			<result name="success">/jsp/LinkQualityReportPage/list.jsp</result>
+		</action>
+
+		<!-- ajax次查询 -->
+		<action name="AjaxSearch" class="LinkQualityReportAction"
+			method="ajaxSearch">
+			<result type="json">
+				<param name="root">resultList</param>
+			</result>
+		</action>
+
+
+		<!-- 添加列表 -->
+		<action name="InAdd" class="LinkQualityReportAction" method="inAdd">
+			<result name="success">/jsp/LinkQualityReportPage/add.jsp</result>
+
+		</action>
+
+		<action name="Add" class="LinkQualityReportAction" method="add">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/linkQualityReport</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 修改列表 -->
+		<action name="InUpdate" class="LinkQualityReportAction" method="inUpdate">
+			<result name="success">/jsp/LinkQualityReportPage/update.jsp</result>
+		</action>
+
+		<action name="Update" class="LinkQualityReportAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/linkQualityReport</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 删除列表 -->
+		<action name="Delete" class="LinkQualityReportAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/linkQualityReport</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 重发列表 -->
+		<action name="reSend" class="LinkQualityReportAction" method="reSend">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/linkQualityReport</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 实时流量 -->
+		<action name="RealTimeReport" class="LinkQualityReportAction" method="realTimeReport">
+			<result name="success">/jsp/LinkQualityReportPage/realtimeGraph.jsp</result>
+		</action>
+		
+		<!-- 历史流量 -->
+		<action name="HistoryReport" class="LinkQualityReportAction" method="historyReport">
+			<result name="success">/jsp/LinkQualityReportPage/historyGraph.jsp</result>
+		</action>
+
+	</package>
+</struts>
+

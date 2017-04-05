@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="dashboard" namespace="/dashboard" extends="json-default">
+		<!-- 进入查询列表 -->
+		<action name="InSearch" class="DashboardAction" method="inSearch">
+			<result name="success" type="redirectAction">
+				<param name="actionName">Search</param>
+			</result>
+		</action>
+
+		<!-- 查询列表 -->
+		<action name="Search" class="DashboardAction" method="search">
+			<result name="success">/jsp/DashBoardPage/dashboard.jsp</result>
+		</action>
+		
+		<!-- ajax次查询 -->
+		<action name="AjaxSearch" class="DashboardAction" method="ajaxSearch">
+			<result type="json">
+				<param name="root">resultMsg</param>
+			</result>
+		</action>
+
+
+	</package>
+</struts>
+

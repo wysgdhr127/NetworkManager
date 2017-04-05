@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.Admin">
+
+	<select id="select" parameterType="Admin" resultType="Admin">
+		select		
+		id	id,
+		username	username,
+		password	password,
+		real_name	realName,
+		admin_email	adminEmail,
+		function_privilege	functionPrivilege,
+		create_time	createTime,
+		delete_time	deleteTime,
+		last_login_time	lastLoginTime,
+		status	status
+
+		from admin
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='username !=null'>
+			   and username= #{username}
+			</if>
+			<if test='password !=null'>
+			   and password= #{password}
+			</if>
+			<if test='realName !=null'>
+			   and real_name= #{realName}
+			</if>
+			<if test='adminEmail !=null'>
+			   and admin_email= #{adminEmail}
+			</if>
+			<if test='functionPrivilege !=null'>
+			   and function_privilege= #{functionPrivilege}
+			</if>
+			<if test='createTime !=null'>
+			   and create_time= #{createTime}
+			</if>
+			<if test='deleteTime !=null'>
+			   and delete_time= #{deleteTime}
+			</if>
+			<if test='lastLoginTime !=null'>
+			   and last_login_time= #{lastLoginTime}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Admin" resultType="int">
+		select count(1) from admin
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='username !=null'>
+			   and username= #{username}
+			</if>
+			<if test='password !=null'>
+			   and password= #{password}
+			</if>
+			<if test='realName !=null'>
+			   and real_name= #{realName}
+			</if>
+			<if test='adminEmail !=null'>
+			   and admin_email= #{adminEmail}
+			</if>
+			<if test='functionPrivilege !=null'>
+			   and function_privilege= #{functionPrivilege}
+			</if>
+			<if test='createTime !=null'>
+			   and create_time= #{createTime}
+			</if>
+			<if test='deleteTime !=null'>
+			   and delete_time= #{deleteTime}
+			</if>
+			<if test='lastLoginTime !=null'>
+			   and last_login_time= #{lastLoginTime}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap" resultType="Admin">
+		select
+		id	id,
+		username	username,
+		password	password,
+		real_name	realName,
+		admin_email	adminEmail,
+		function_privilege	functionPrivilege,
+		create_time	createTime,
+		delete_time	deleteTime,
+		last_login_time	lastLoginTime,
+		status	status
+
+		from admin
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='username !=null'>
+			   and username= #{username}
+			</if>
+			<if test='password !=null'>
+			   and password= #{password}
+			</if>
+			<if test='realName !=null'>
+			   and real_name= #{realName}
+			</if>
+			<if test='adminEmail !=null'>
+			   and admin_email= #{adminEmail}
+			</if>
+			<if test='functionPrivilege !=null'>
+			   and function_privilege= #{functionPrivilege}
+			</if>
+			<if test='createTime !=null'>
+			   and create_time= #{createTime}
+			</if>
+			<if test='deleteTime !=null'>
+			   and delete_time= #{deleteTime}
+			</if>
+			<if test='lastLoginTime !=null'>
+			   and last_login_time= #{lastLoginTime}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="Admin">
+		update admin
+		<set>
+			<if test='username !=null'>
+			   username= #{username},
+			</if>
+			<if test='password !=null'>
+			   password= #{password},
+			</if>
+			<if test='realName !=null'>
+			   real_name= #{realName},
+			</if>
+			<if test='adminEmail !=null'>
+			   admin_email= #{adminEmail},
+			</if>
+			<if test='functionPrivilege !=null'>
+			   function_privilege= #{functionPrivilege},
+			</if>
+			<if test='createTime !=null'>
+			   create_time= #{createTime},
+			</if>
+			<if test='deleteTime !=null'>
+			   delete_time= #{deleteTime},
+			</if>
+			<if test='lastLoginTime !=null'>
+			   last_login_time= #{lastLoginTime},
+			</if>
+			<if test='status !=null'>
+			   status= #{status},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into admin(
+			username,
+			password,
+			real_name,
+			admin_email,
+			function_privilege,
+			create_time,
+			delete_time,
+			last_login_time,
+			status
+
+		)
+		values(
+			#{username},
+			#{password},
+			#{realName},
+			#{adminEmail},
+			#{functionPrivilege},
+			#{createTime},
+			#{deleteTime},
+			#{lastLoginTime},
+			#{status}
+
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="Admin">
+		delete from admin
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='username !=null'>
+			   and username= #{username}
+			</if>
+			<if test='password !=null'>
+			   and password= #{password}
+			</if>
+			<if test='realName !=null'>
+			   and real_name= #{realName}
+			</if>
+			<if test='adminEmail !=null'>
+			   and admin_email= #{adminEmail}
+			</if>
+			<if test='functionPrivilege !=null'>
+			   and function_privilege= #{functionPrivilege}
+			</if>
+			<if test='createTime !=null'>
+			   and create_time= #{createTime}
+			</if>
+			<if test='deleteTime !=null'>
+			   and delete_time= #{deleteTime}
+			</if>
+			<if test='lastLoginTime !=null'>
+			   and last_login_time= #{lastLoginTime}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from admin
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='username !=null'>
+			   and username= #{username}
+			</if>
+			<if test='password !=null'>
+			   and password= #{password}
+			</if>
+			<if test='realName !=null'>
+			   and real_name= #{realName}
+			</if>
+			<if test='adminEmail !=null'>
+			   and admin_email= #{adminEmail}
+			</if>
+			<if test='functionPrivilege !=null'>
+			   and function_privilege= #{functionPrivilege}
+			</if>
+			<if test='createTime !=null'>
+			   and create_time= #{createTime}
+			</if>
+			<if test='deleteTime !=null'>
+			   and delete_time= #{deleteTime}
+			</if>
+			<if test='lastLoginTime !=null'>
+			   and last_login_time= #{lastLoginTime}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+
+</mapper>

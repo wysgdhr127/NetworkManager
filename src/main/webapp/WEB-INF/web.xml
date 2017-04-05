@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+		 version="3.1">
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>frame_1.0.x.root</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>Initialization</servlet-name>
+		<servlet-class>com.algoblu.sdwan.linkswitch.basic.init.Initialization
+		</servlet-class>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+
+	<mime-mapping>
+		<extension>rar</extension>
+		<mime-type>application/octet-stream</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>zip</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:applicationContext-common.xml
+		</param-value>
+	</context-param>
+
+	<!-- Spring管理Log4j,修改log4j.properties不用重启 -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:log4j.properties</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener
+		</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.algoblu.sdwan.linkswitch.basic.shutdownListener.Shutdown
+		</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<!-- 自定义filter filterUrl是配置的过滤器拦截的请求 -->
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.algoblu.sdwan.linkswitch.filter.LoginFilter</filter-class>
+		<init-param>
+			<param-name>filterUrl</param-name>
+			<param-value>
+
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>notFilterUrl</param-name>
+			<param-value>
+				/jsp/LoginPage/login.jsp,
+				/login.action
+			</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>struts-prepare</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareFilter
+		</filter-class>
+		<init-param>
+			<param-name>actionPackages</param-name>
+			<param-value>/*</param-value>
+		</init-param>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>struts-default.xml,struts-plugin.xml,struts.xml
+			</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>struts-execute</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsExecuteFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts-prepare</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts-execute</filter-name>
+		<url-pattern>*.action</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- dwr -->
+
+	<!-- <display-name></display-name> -->
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>
+			org.directwebremoting.servlet.DwrServlet
+		</servlet-class>
+		<init-param>
+			<param-name>crossDomainSessionSecurity</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allowScriptTagRemoting</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>classes</param-name>
+			<param-value>java.lang.Object</param-value>
+		</init-param>
+		<init-param>
+			<param-name>activeReverseAjaxEnabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>initApplicationScopeCreatorsAtStartup</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>maxWaitAfterWrite</param-name>
+			<param-value>3000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>WARN</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<!-- 指定核心Servlet映射的URL -->
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>360</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>/jsp/LoginPage/login.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- 错误页面 -->
+	<!-- <error-page> <error-code>500</error-code> <location>/jsp/500.jsp</location> 
+		</error-page> <error-page> <error-code>400</error-code> <location>/jsp/login_customer.jsp</location> 
+		</error-page> <error-page> <error-code>403</error-code> <location>/jsp/403.jsp</location> 
+		</error-page> -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/jsp/LoginPage/login.jsp</location>
+	</error-page>
+</web-app>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.Policy">
+
+	<select id="select" parameterType="Policy"
+		resultType="com.algoblu.sdwan.linkswitch.business.model_policy.vo.PolicyVo">
+		SELECT
+		p.id id,
+		link_id linkId,
+		l.link_name linkName,
+		delay_time
+		delayTime,
+		jitter jitter,
+		loss_package_rate lossPackageRate,
+		backup_link_id backupLinkId,
+		l2.link_name backupLinkName,
+		b.bridge_desc
+		bridgeDesc,
+		p. STATUS STATUS
+		FROM
+		policy p
+		JOIN link l ON p.link_id = l.id
+		JOIN link l2 ON p.backup_link_id = l2.id
+		JOIN port pt ON
+		l.current_port_id = pt.id
+		JOIN bridge b ON pt.bridge_id = b.id
+		<where>
+			<if test='id !=null'>
+				and p.id= #{id}
+			</if>
+			<if test='linkId !=null'>
+				and link_id= #{linkId}
+			</if>
+			<if test='delayTime !=null'>
+				and delay_time= #{delayTime}
+			</if>
+			<if test='jitter !=null'>
+				and jitter= #{jitter}
+			</if>
+			<if test='lossPackageRate !=null'>
+				and loss_package_rate= #{lossPackageRate}
+			</if>
+			<if test='backupLinkId !=null'>
+				and backup_link_id= #{backupLinkId}
+			</if>
+			<if test='status !=null'>
+				and p.status= #{status}
+			</if>
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<select id="count" parameterType="Policy" resultType="int">
+		select count(1) from policy
+		<where>
+			<if test='id !=null'> and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+				and link_id= #{linkId}
+			</if>
+			<if test='delayTime !=null'>
+				and delay_time= #{delayTime}
+			</if>
+			<if test='jitter !=null'>
+				and jitter= #{jitter}
+			</if>
+			<if test='lossPackageRate !=null'>
+				and loss_package_rate= #{lossPackageRate}
+			</if>
+			<if test='backupLinkId !=null'>
+				and backup_link_id= #{backupLinkId}
+			</if>
+			<if test='status !=null'>
+				and status= #{status}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap" resultType="Policy">
+		SELECT
+		id id,
+		link_id linkId,
+		delay_time delayTime,
+		jitter jitter,
+		loss_package_rate lossPackageRate,
+		backup_link_id backupLinkId,
+		STATUS
+		STATUS
+		FROM
+		policy
+		<where>
+			<if test='id !=null'>
+				and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+				and link_id= #{linkId}
+			</if>
+			<if test='delayTime !=null'>
+				and delay_time= #{delayTime}
+			</if>
+			<if test='jitter !=null'>
+				and jitter= #{jitter}
+			</if>
+			<if test='lossPackageRate !=null'>
+				and loss_package_rate= #{lossPackageRate}
+			</if>
+			<if test='backupLinkId !=null'>
+				and backup_link_id= #{backupLinkId}
+			</if>
+			<if test='status !=null'>
+				and status= #{status}
+			</if>
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="Policy">
+		update policy
+		<set>
+			<if test='linkId !=null'>
+				link_id= #{linkId},
+			</if>
+			<if test='delayTime !=null'>
+				delay_time= #{delayTime},
+			</if>
+			<if test='jitter !=null'>
+				jitter= #{jitter},
+			</if>
+			<if test='lossPackageRate !=null'>
+				loss_package_rate= #{lossPackageRate},
+			</if>
+			<if test='backupLinkId !=null'>
+				backup_link_id= #{backupLinkId},
+			</if>
+			<if test='status !=null'>
+				status= #{status},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into policy(
+		link_id, delay_time, jitter, loss_package_rate,
+		backup_link_id, status
+		)
+		values(
+		#{linkId}, #{delayTime}, #{jitter},
+		#{lossPackageRate}, #{backupLinkId},
+		#{status}
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="Policy">
+		delete from policy
+		<where>
+			<if test='id !=null'> and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+				and link_id= #{linkId}
+			</if>
+			<if test='delayTime !=null'>
+				and delay_time= #{delayTime}
+			</if>
+			<if test='jitter !=null'>
+				and jitter= #{jitter}
+			</if>
+			<if test='lossPackageRate !=null'>
+				and loss_package_rate= #{lossPackageRate}
+			</if>
+			<if test='backupLinkId !=null'>
+				and backup_link_id= #{backupLinkId}
+			</if>
+			<if test='status !=null'>
+				and status= #{status}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from policy
+		<where>
+			<if test='id !=null'> and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+				and link_id= #{linkId}
+			</if>
+			<if test='delayTime !=null'>
+				and delay_time= #{delayTime}
+			</if>
+			<if test='jitter !=null'>
+				and jitter= #{jitter}
+			</if>
+			<if test='lossPackageRate !=null'>
+				and loss_package_rate= #{lossPackageRate}
+			</if>
+			<if test='backupLinkId !=null'>
+				and backup_link_id= #{backupLinkId}
+			</if>
+			<if test='status !=null'>
+				and status= #{status}
+			</if>
+		</where>
+	</delete>
+
+
+	<select id="findPolicy" parameterType="Policy"
+		resultType="com.algoblu.sdwan.linkswitch.business.model_policy.vo.PolicyVo">
+		SELECT
+		p.id id,
+		link_id linkId,
+		n.node_ip nodeIp,
+		n.node_code nodeCode,
+		pt.port_code currentPort,
+		pt2.port_ip portIp,
+		pt2.port_code backupPort,
+		b.bridge_code bridgeCode,
+		l.link_name linkName,
+		delay_time delayTime,
+		jitter jitter,
+		loss_package_rate lossPackageRate,
+		backup_link_id backupLinkId,
+		p. STATUS STATUS
+		FROM
+		policy p
+		JOIN link l ON p.link_id = l.id
+		JOIN port pt ON l.current_port_id = pt.id
+		JOIN link l2 ON p.backup_link_id = l2.id
+		JOIN port pt2 ON l2.current_port_id = pt2.id
+		JOIN node n ON pt.node_id = n.id
+		JOIN bridge b ON pt.bridge_id = b.id
+		<where>
+			<if test='id !=null'>
+				and p.id= #{id}
+			</if>
+			<if test='linkId !=null'>
+				and link_id= #{linkId}
+			</if>
+			<if test='delayTime !=null'>
+				and delay_time= #{delayTime}
+			</if>
+			<if test='jitter !=null'>
+				and jitter= #{jitter}
+			</if>
+			<if test='lossPackageRate !=null'>
+				and loss_package_rate= #{lossPackageRate}
+			</if>
+			<if test='backupLinkId !=null'>
+				and backup_link_id= #{backupLinkId}
+			</if>
+			<if test='status !=null'>
+				and p.status= #{status}
+			</if>
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+
+</mapper>

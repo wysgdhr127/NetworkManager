@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.Bridge">
+
+	<select id="select" parameterType="Bridge" resultType="Bridge">
+		select		
+		id	id,
+		bridge_code	bridgeCode,
+		bridge_desc	bridgeDesc,
+		status	status
+
+		from bridge
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='bridgeCode !=null'>
+			   and bridge_code= #{bridgeCode}
+			</if>
+			<if test='bridgeDesc !=null'>
+			   and bridge_desc= #{bridgeDesc}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Bridge" resultType="int">
+		select count(1) from bridge
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='bridgeCode !=null'>
+			   and bridge_code= #{bridgeCode}
+			</if>
+			<if test='bridgeDesc !=null'>
+			   and bridge_desc= #{bridgeDesc}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap" resultType="Bridge">
+		select
+		id	id,
+		bridge_code	bridgeCode,
+		bridge_desc	bridgeDesc,
+		status	status
+
+		from bridge
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='bridgeCode !=null'>
+			   and bridge_code= #{bridgeCode}
+			</if>
+			<if test='bridgeDesc !=null'>
+			   and bridge_desc= #{bridgeDesc}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="Bridge">
+		update bridge
+		<set>
+			<if test='bridgeCode !=null'>
+			   bridge_code= #{bridgeCode},
+			</if>
+			<if test='bridgeDesc !=null'>
+			   bridge_desc= #{bridgeDesc},
+			</if>
+			<if test='status !=null'>
+			   status= #{status},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into bridge(
+			bridge_code,
+			bridge_desc,
+			status
+
+		)
+		values(
+			#{bridgeCode},
+			#{bridgeDesc},
+			#{status}
+
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="Bridge">
+		delete from bridge
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='bridgeCode !=null'>
+			   and bridge_code= #{bridgeCode}
+			</if>
+			<if test='bridgeDesc !=null'>
+			   and bridge_desc= #{bridgeDesc}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from bridge
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='bridgeCode !=null'>
+			   and bridge_code= #{bridgeCode}
+			</if>
+			<if test='bridgeDesc !=null'>
+			   and bridge_desc= #{bridgeDesc}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+
+</mapper>

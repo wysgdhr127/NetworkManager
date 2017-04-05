@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.Port">
+
+	<select id="select" parameterType="Port" resultType="com.algoblu.sdwan.linkswitch.business.model_port.vo.PortVo">
+		SELECT
+		p.id id,
+		node_id nodeId,
+		port_code portCode,
+		port_name portName,
+		b.id bridgeId,
+		b.bridge_code bridgeCode,
+		b.bridge_desc bridgeDesc,
+		mac_address macAddress,
+		port_ip portIp,
+		n.location location,
+		n.node_code nodeCode,
+		p. STATUS STATUS
+		FROM
+		port p
+		JOIN node n ON p.node_id = n.id
+		JOIN bridge b ON p.bridge_id = b.id
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='nodeId !=null'>
+			   and node_id= #{nodeId}
+			</if>
+			<if test='bridgeId !=null'>
+			   and bridge_id= #{bridgeId}
+			</if>
+			<if test='portCode !=null'>
+			   and port_code= #{portCode}
+			</if>
+			<if test='portName !=null'>
+			   and port_name= #{portName}
+			</if>
+			<if test='portIp !=null'>
+			   and port_ip= #{portIp}
+			</if>
+			<if test='macAddress !=null'>
+			   and mac_address= #{macAddress}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Port" resultType="int">
+		select count(1) from port
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='nodeId !=null'>
+			   and node_id= #{nodeId}
+			</if>
+			<if test='bridgeId !=null'>
+			   and bridge_id= #{bridgeId}
+			</if>
+			<if test='portCode !=null'>
+			   and port_code= #{portCode}
+			</if>
+			<if test='portName !=null'>
+			   and port_name= #{portName}
+			</if>
+			<if test='portIp !=null'>
+			   and port_ip= #{portIp}
+			</if>
+			<if test='macAddress !=null'>
+			   and mac_address= #{macAddress}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap" resultType="com.algoblu.sdwan.linkswitch.business.model_port.vo.PortVo">
+		SELECT
+		p.id id,
+		node_id nodeId,
+		port_code portCode,
+		port_name portName,
+		b.id bridgeId,
+		b.bridge_code bridgeCode,
+		b.bridge_desc bridgeDesc,
+		mac_address macAddress,
+		port_ip portIp,
+		n.location location,
+		n.node_code nodeCode,
+		p. STATUS STATUS
+		FROM
+		port p
+		JOIN node n ON p.node_id = n.id
+		JOIN bridge b ON p.bridge_id = b.id
+		<where>
+			<if test='id !=null'>
+			   and p.id= #{id}
+			</if>
+			<if test='nodeId !=null'>
+			   and node_id= #{nodeId}
+			</if>
+			<if test='bridgeId !=null'>
+			   and bridge_id= #{bridgeId}
+			</if>
+			<if test='portCode !=null'>
+			   and port_code= #{portCode}
+			</if>
+			<if test='portName !=null'>
+			   and port_name= #{portName}
+			</if>
+			<if test='portIp !=null'>
+			   and port_ip= #{portIp}
+			</if>
+			<if test='macAddress !=null'>
+			   and mac_address= #{macAddress}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="Port">
+		update port
+		<set>
+			<if test='nodeId !=null'>
+			   node_id= #{nodeId},
+			</if>
+			<if test='bridgeId !=null'>
+			   bridge_id= #{bridgeId},
+			</if>
+			<if test='portCode !=null'>
+			   port_code= #{portCode},
+			</if>
+			<if test='portName !=null'>
+			   port_name= #{portName},
+			</if>
+			<if test='portIp !=null'>
+			   port_ip= #{portIp},
+			</if>
+			<if test='macAddress !=null'>
+			   mac_address= #{macAddress},
+			</if>
+			<if test='status !=null'>
+			   status= #{status},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into port(
+			node_id,
+			bridge_id,
+			port_code,
+			port_name,
+			port_ip,
+			mac_address,
+			status
+
+		)
+		values(
+			#{nodeId},
+			#{bridgeId},
+			#{portCode},
+			#{portName},
+			#{portIp},
+			#{macAddress},
+			#{status}
+
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="Port">
+		delete from port
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='nodeId !=null'>
+			   and node_id= #{nodeId}
+			</if>
+			<if test='bridgeId !=null'>
+			   and bridge_id= #{bridgeId}
+			</if>
+			<if test='portCode !=null'>
+			   and port_code= #{portCode}
+			</if>
+			<if test='portName !=null'>
+			   and port_name= #{portName}
+			</if>
+			<if test='portIp !=null'>
+			   and port_ip= #{portIp}
+			</if>
+			<if test='macAddress !=null'>
+			   and mac_address= #{macAddress}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from port
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='nodeId !=null'>
+			   and node_id= #{nodeId}
+			</if>
+			<if test='bridgeId !=null'>
+			   and bridge_id= #{bridgeId}
+			</if>
+			<if test='portCode !=null'>
+			   and port_code= #{portCode}
+			</if>
+			<if test='portName !=null'>
+			   and port_name= #{portName}
+			</if>
+			<if test='portIp !=null'>
+			   and port_ip= #{portIp}
+			</if>
+			<if test='macAddress !=null'>
+			   and mac_address= #{macAddress}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+
+</mapper>

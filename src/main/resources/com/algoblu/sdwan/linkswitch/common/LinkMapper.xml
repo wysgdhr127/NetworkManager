@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.Link">
+	<select id="select" parameterType="Link"
+		resultType="com.algoblu.sdwan.linkswitch.business.model_link.vo.LinkVo">
+		SELECT
+		l.id id,
+		b.id bridgeId,
+		b.bridge_code bridgeCode,
+		current_port_id
+		currentPortId,
+		target_port_id targetPortId,
+		b.bridge_desc bridgeDesc,
+		p.port_code
+		currentPortCode,
+		p.node_id currentPortNodeId,
+		n.node_code
+		currentPortNodeCode,
+		n.location currentPortNodeLocation,
+		p2.port_code
+		targetPortCode,
+		p2.node_id targetPortNodeId,
+		n2.node_code
+		targetPortNodeCode,
+		n2.location targetPortNodeLocation,
+		p.port_ip
+		portIP,
+		link_name linkName,
+		is_active isActive,
+		l. STATUS STATUS
+		FROM
+		link
+		l
+		JOIN port p ON l.current_port_id = p.id
+		JOIN node n ON p.node_id =
+		n.id
+		JOIN bridge b ON p.bridge_id = b.id
+		JOIN port p2 ON
+		l.target_port_id = p2.id
+		JOIN node n2 ON p2.node_id = n2.id
+		<where>
+			<if test='id !=null'>
+				and l.id= #{id}
+			</if>
+			<if test='currentPortId !=null'>
+				and current_port_id= #{currentPortId}
+			</if>
+			<if test='targetPortId !=null'>
+				and target_port_id= #{targetPortId}
+			</if>
+			<if test='linkName !=null'>
+				and link_name= #{linkName}
+			</if>
+			<if test='status !=null'>
+				and l.status= #{status}
+			</if>
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<select id="count" parameterType="Link" resultType="int">
+		select count(1) from link
+		<where>
+			<if test='id !=null'> and id= #{id}
+			</if>
+			<if test='currentPortId !=null'>
+				and current_port_id= #{currentPortId}
+			</if>
+			<if test='targetPortId !=null'>
+				and target_port_id= #{targetPortId}
+			</if>
+			<if test='linkName !=null'>
+				and link_name= #{linkName}
+			</if>
+			<if test='isActive !=null'>
+				and is_active= #{isActive}
+			</if>
+			<if test='status !=null'>
+				and status= #{status}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap"
+		resultType="com.algoblu.sdwan.linkswitch.business.model_link.vo.LinkVo">
+		SELECT
+		l.id id,
+		b.id bridgeId,
+		b.bridge_code bridgeCode,
+		current_port_id currentPortId,
+		target_port_id targetPortId,
+		b.bridge_desc bridgeDesc,
+		p.port_code currentPortCode,
+		p.node_id currentPortNodeId,
+		n.node_code currentPortNodeCode,
+		n.node_ip currentPortNodeIp,
+		n.location currentPortNodeLocation,
+		p2.port_code targetPortCode,
+		p2.node_id targetPortNodeId,
+		n2.node_code targetPortNodeCode,
+		n2.location targetPortNodeLocation,
+		p.port_ip portIP,
+		link_name linkName,
+		is_active isActive,
+		l. STATUS STATUS
+		FROM
+		link l
+		JOIN port p ON l.current_port_id = p.id
+		JOIN node n ON p.node_id = n.id
+		JOIN bridge b ON p.bridge_id = b.id
+		JOIN port p2 ON l.target_port_id = p2.id
+		JOIN node n2 ON p2.node_id = n2.id
+		<where>
+			<if test='id !=null'>
+				and l.id= #{id}
+			</if>
+			<if test='currentPortId !=null'>
+				and current_port_id= #{currentPortId}
+			</if>
+			<if test='targetPortId !=null'>
+				and target_port_id= #{targetPortId}
+			</if>
+			<if test='linkName !=null'>
+				and link_name= #{linkName}
+			</if>
+			<if test='isActive !=null'>
+				and is_active= #{isActive}
+			</if>
+			<if test='status !=null'>
+				and l.status= #{status}
+			</if>
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="Link">
+		update link
+		<set>
+			<if test='currentPortId !=null'> current_port_id= #{currentPortId},
+			</if>
+			<if test='targetPortId !=null'>
+				target_port_id= #{targetPortId},
+			</if>
+			<if test='linkName !=null'>
+				link_name= #{linkName},
+			</if>
+			<if test='isActive !=null'>
+				is_active= #{isActive},
+			</if>
+			<if test='status !=null'>
+				status= #{status},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into link(
+		current_port_id, target_port_id, link_name, is_active,
+		status
+		)
+		values(
+		#{currentPortId}, #{targetPortId}, #{linkName},
+		#{isActive}, #{status}
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="Link">
+		delete from link
+		<where>
+			<if test='id !=null'> and id= #{id}
+			</if>
+			<if test='currentPortId !=null'>
+				and current_port_id= #{currentPortId}
+			</if>
+			<if test='targetPortId !=null'>
+				and target_port_id= #{targetPortId}
+			</if>
+			<if test='linkName !=null'>
+				and link_name= #{linkName}
+			</if>
+			<if test='isActive !=null'>
+				and is_active= #{isActive}
+			</if>
+			<if test='status !=null'>
+				and status= #{status}
+			</if>
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from link
+		<where>
+			<if test='id !=null'> and id= #{id}
+			</if>
+			<if test='currentPortId !=null'>
+				and current_port_id= #{currentPortId}
+			</if>
+			<if test='targetPortId !=null'>
+				and target_port_id= #{targetPortId}
+			</if>
+			<if test='linkName !=null'>
+				and link_name= #{linkName}
+			</if>
+			<if test='isActive !=null'>
+				and is_active= #{isActive}
+			</if>
+			<if test='status !=null'>
+				and status= #{status}
+			</if>
+		</where>
+	</delete>
+	<select id="otherlink"
+		parameterType="com.algoblu.sdwan.linkswitch.business.model_link.vo.LinkVo"
+		resultType="com.algoblu.sdwan.linkswitch.business.model_link.vo.LinkVo">
+		SELECT
+		l.id otherLink,
+		l.link_name otherLinkName,
+		p.port_code otherPortCode
+		FROM
+		link l
+		JOIN port p ON
+		l.current_port_id = p.id
+		JOIN bridge b ON p.bridge_id = b.id
+		<where>
+			<if test='bridgeId !=null'>
+				and p.bridge_id= #{bridgeId}
+			</if>
+			<if test='id !=null'>
+				and l.id != #{id}
+			</if>
+		</where>
+	</select>
+
+</mapper>

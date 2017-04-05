@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="admin" namespace="/admin" extends="json-default">
+		<!-- 进入查询列表 -->
+		<action name="InSearch" class="AdminAction" method="inSearch">
+			<result name="success" type="redirectAction">
+				<param name="actionName">Search</param>
+			</result>
+		</action>
+
+		<!-- 查询列表 -->
+		<action name="Search" class="AdminAction" method="search">
+			<result name="success">/jsp/UserPage/list.jsp</result>
+		</action>
+
+		<!-- ajax次查询 -->
+		<action name="AjaxSearch" class="AdminAction" method="ajaxSearch">
+			<result type="json">
+				<param name="root">resultList</param>
+			</result>
+		</action>
+
+
+
+
+		<!-- 添加列表 -->
+		<action name="InAdd" class="AdminAction" method="inAdd">
+			<result name="success">/jsp/UserPage/add.jsp</result>
+
+		</action>
+		
+		<action name="Add" class="AdminAction" method="add">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/admin</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 修改列表 -->
+		<action name="InUpdate" class="AdminAction" method="inUpdate">
+			<result name="success">/jsp/UserPage/update.jsp</result>
+		</action>
+		
+		<action name="Update" class="AdminAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/admin</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 删除列表 -->
+		<action name="Delete" class="AdminAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/admin</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+		<!-- 重发列表 -->
+		<action name="reSend" class="AdminAction" method="reSend">
+			<result name="success" type="redirectAction">
+				<param name="namespace">/admin</param>
+				<param name="actionName">Search</param>
+				<param name="method">search</param>
+				<param name="error.success">${error.success}</param>
+				<param name="error.errorMessage">${error.errorMessage}</param>
+			</result>
+		</action>
+
+
+	</package>
+</struts>
+

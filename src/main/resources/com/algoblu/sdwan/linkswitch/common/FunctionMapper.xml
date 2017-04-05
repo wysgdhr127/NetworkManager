@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.Function">
+
+	<select id="select" parameterType="Function" resultType="Function">
+		select		
+		id	id,
+		parent_function_id	parentFunctionId,
+		function_level	functionLevel,
+		function_type	functionType,
+		function_name	functionName,
+		role_string	roleString,
+		function_url	functionUrl,
+		status	status
+
+		from function
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='parentFunctionId !=null'>
+			   and parent_function_id= #{parentFunctionId}
+			</if>
+			<if test='functionLevel !=null'>
+			   and function_level= #{functionLevel}
+			</if>
+			<if test='functionType !=null'>
+			   and function_type= #{functionType}
+			</if>
+			<if test='functionName !=null'>
+			   and function_name= #{functionName}
+			</if>
+			<if test='roleString !=null'>
+			   and role_string= #{roleString}
+			</if>
+			<if test='functionUrl !=null'>
+			   and function_url= #{functionUrl}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="Function" resultType="int">
+		select count(1) from function
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='parentFunctionId !=null'>
+			   and parent_function_id= #{parentFunctionId}
+			</if>
+			<if test='functionLevel !=null'>
+			   and function_level= #{functionLevel}
+			</if>
+			<if test='functionType !=null'>
+			   and function_type= #{functionType}
+			</if>
+			<if test='functionName !=null'>
+			   and function_name= #{functionName}
+			</if>
+			<if test='roleString !=null'>
+			   and role_string= #{roleString}
+			</if>
+			<if test='functionUrl !=null'>
+			   and function_url= #{functionUrl}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap" resultType="Function">
+		select
+		id	id,
+		parent_function_id	parentFunctionId,
+		function_level	functionLevel,
+		function_type	functionType,
+		function_name	functionName,
+		role_string	roleString,
+		function_url	functionUrl,
+		status	status
+
+		from function
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='parentFunctionId !=null'>
+			   and parent_function_id= #{parentFunctionId}
+			</if>
+			<if test='functionLevel !=null'>
+			   and function_level= #{functionLevel}
+			</if>
+			<if test='functionType !=null'>
+			   and function_type= #{functionType}
+			</if>
+			<if test='functionName !=null'>
+			   and function_name= #{functionName}
+			</if>
+			<if test='roleString !=null'>
+			   and role_string= #{roleString}
+			</if>
+			<if test='functionUrl !=null'>
+			   and function_url= #{functionUrl}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="Function">
+		update function
+		<set>
+			<if test='parentFunctionId !=null'>
+			   parent_function_id= #{parentFunctionId},
+			</if>
+			<if test='functionLevel !=null'>
+			   function_level= #{functionLevel},
+			</if>
+			<if test='functionType !=null'>
+			   function_type= #{functionType},
+			</if>
+			<if test='functionName !=null'>
+			   function_name= #{functionName},
+			</if>
+			<if test='roleString !=null'>
+			   role_string= #{roleString},
+			</if>
+			<if test='functionUrl !=null'>
+			   function_url= #{functionUrl},
+			</if>
+			<if test='status !=null'>
+			   status= #{status},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into function(
+			parent_function_id,
+			function_level,
+			function_type,
+			function_name,
+			role_string,
+			function_url,
+			status
+
+		)
+		values(
+			#{parentFunctionId},
+			#{functionLevel},
+			#{functionType},
+			#{functionName},
+			#{roleString},
+			#{functionUrl},
+			#{status}
+
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="Function">
+		delete from function
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='parentFunctionId !=null'>
+			   and parent_function_id= #{parentFunctionId}
+			</if>
+			<if test='functionLevel !=null'>
+			   and function_level= #{functionLevel}
+			</if>
+			<if test='functionType !=null'>
+			   and function_type= #{functionType}
+			</if>
+			<if test='functionName !=null'>
+			   and function_name= #{functionName}
+			</if>
+			<if test='roleString !=null'>
+			   and role_string= #{roleString}
+			</if>
+			<if test='functionUrl !=null'>
+			   and function_url= #{functionUrl}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from function
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='parentFunctionId !=null'>
+			   and parent_function_id= #{parentFunctionId}
+			</if>
+			<if test='functionLevel !=null'>
+			   and function_level= #{functionLevel}
+			</if>
+			<if test='functionType !=null'>
+			   and function_type= #{functionType}
+			</if>
+			<if test='functionName !=null'>
+			   and function_name= #{functionName}
+			</if>
+			<if test='roleString !=null'>
+			   and role_string= #{roleString}
+			</if>
+			<if test='functionUrl !=null'>
+			   and function_url= #{functionUrl}
+			</if>
+			<if test='status !=null'>
+			   and status= #{status}
+			</if>
+
+		</where>
+	</delete>
+
+	<select id="selectFunction"
+			parameterType="com.algoblu.sdwan.linkswitch.business.model_function.vo.FunctionVo"
+			resultType="Function">
+		select
+		id id,
+		parent_function_id parentFunctionId,
+		function_level
+		functionLevel,
+		function_type functionType,
+		function_name functionName,
+		role_string roleString,
+		function_url functionUrl,
+		status status
+		from
+		function
+		<where>
+			<if test="id !=null">
+				and id = #{id}
+			</if>
+			<if test="parentFunctionId !=null">
+				and parent_function_id =
+				#{parentFunctionId}
+			</if>
+			<if test="functionLevel !=null">
+				and function_level =
+				#{functionLevel}
+			</if>
+			<if test="functionType !=null">
+				and function_type = #{functionType}
+			</if>
+			<if test="functionName !=null">
+				and function_name = #{functionName}
+			</if>
+			<if test="role !=null">
+				and role_string LIKE
+				CONCAT(CONCAT('%',#{role}),'%')
+			</if>
+			<if test="functionUrl !=null">
+				and function_url = #{functionUrl}
+			</if>
+			<if test="status !=null">
+				and status = #{status}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<select id="selectMaxId"
+			parameterType="com.algoblu.sdwan.linkswitch.business.model_function.vo.FunctionVo"
+			resultType="Function">
+		SELECT
+		MAX(id) id
+		FROM
+		function
+		<where>
+			<if test="parentFunctionId !=null">
+				and parent_function_id =
+				#{parentFunctionId}
+			</if>
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+</mapper>

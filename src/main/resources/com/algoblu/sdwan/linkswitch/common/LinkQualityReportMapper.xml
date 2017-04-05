@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.LinkQualityReport">
+
+	<select id="select" parameterType="LinkQualityReport" resultType="LinkQualityReport">
+		select		
+		id	id,
+		link_id	linkId,
+		delay	delay,
+		jitter	jitter,
+		losspacket	losspacket,
+		datatime	datatime
+
+		from link_quality_report
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+			   and link_id= #{linkId}
+			</if>
+			<if test='delay !=null'>
+			   and delay= #{delay}
+			</if>
+			<if test='jitter !=null'>
+			   and jitter= #{jitter}
+			</if>
+			<if test='losspacket !=null'>
+			   and losspacket= #{losspacket}
+			</if>
+			<if test='datatime !=null'>
+			   and datatime= #{datatime}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="LinkQualityReport" resultType="int">
+		select count(1) from link_quality_report
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+			   and link_id= #{linkId}
+			</if>
+			<if test='delay !=null'>
+			   and delay= #{delay}
+			</if>
+			<if test='jitter !=null'>
+			   and jitter= #{jitter}
+			</if>
+			<if test='losspacket !=null'>
+			   and losspacket= #{losspacket}
+			</if>
+			<if test='datatime !=null'>
+			   and datatime= #{datatime}
+			</if>
+
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap" resultType="LinkQualityReport">
+		select
+		id	id,
+		link_id	linkId,
+		delay	delay,
+		jitter	jitter,
+		losspacket	losspacket,
+		datatime	datatime
+
+		from link_quality_report
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+			   and link_id= #{linkId}
+			</if>
+			<if test='delay !=null'>
+			   and delay= #{delay}
+			</if>
+			<if test='jitter !=null'>
+			   and jitter= #{jitter}
+			</if>
+			<if test='losspacket !=null'>
+			   and losspacket= #{losspacket}
+			</if>
+			<if test='datatime !=null'>
+			   and datatime= #{datatime}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="LinkQualityReport">
+		update link_quality_report
+		<set>
+			<if test='linkId !=null'>
+			   link_id= #{linkId},
+			</if>
+			<if test='delay !=null'>
+			   delay= #{delay},
+			</if>
+			<if test='jitter !=null'>
+			   jitter= #{jitter},
+			</if>
+			<if test='losspacket !=null'>
+			   losspacket= #{losspacket},
+			</if>
+			<if test='datatime !=null'>
+			   datatime= #{datatime},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into link_quality_report(
+			link_id,
+			delay,
+			jitter,
+			losspacket,
+			datatime
+
+		)
+		values(
+			#{linkId},
+			#{delay},
+			#{jitter},
+			#{losspacket},
+			#{datatime}
+
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="LinkQualityReport">
+		delete from link_quality_report
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+			   and link_id= #{linkId}
+			</if>
+			<if test='delay !=null'>
+			   and delay= #{delay}
+			</if>
+			<if test='jitter !=null'>
+			   and jitter= #{jitter}
+			</if>
+			<if test='losspacket !=null'>
+			   and losspacket= #{losspacket}
+			</if>
+			<if test='datatime !=null'>
+			   and datatime= #{datatime}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from link_quality_report
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='linkId !=null'>
+			   and link_id= #{linkId}
+			</if>
+			<if test='delay !=null'>
+			   and delay= #{delay}
+			</if>
+			<if test='jitter !=null'>
+			   and jitter= #{jitter}
+			</if>
+			<if test='losspacket !=null'>
+			   and losspacket= #{losspacket}
+			</if>
+			<if test='datatime !=null'>
+			   and datatime= #{datatime}
+			</if>
+
+		</where>
+	</delete>
+
+
+</mapper>

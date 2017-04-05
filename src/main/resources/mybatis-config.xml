@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="SystemConfig" type="com.algoblu.sdwan.linkswitch.basic.po.SystemConfig" />
+		<typeAlias alias="Function" type="com.algoblu.sdwan.linkswitch.basic.po.Function"/>
+		<typeAlias alias="Admin" type="com.algoblu.sdwan.linkswitch.basic.po.Admin"/>
+		<typeAlias alias="Link" type="com.algoblu.sdwan.linkswitch.basic.po.Link"/>
+		<typeAlias alias="Policy" type="com.algoblu.sdwan.linkswitch.basic.po.Policy"/>
+		<typeAlias alias="Node" type="com.algoblu.sdwan.linkswitch.basic.po.Node"/>
+		<typeAlias alias="Port" type="com.algoblu.sdwan.linkswitch.basic.po.Port"/>
+		<typeAlias alias="LinkQualityReport" type="com.algoblu.sdwan.linkswitch.basic.po.LinkQualityReport"/>
+
+
+		
+		<typeAlias alias="SqlAdapter" type="com.algoblu.sdwan.linkswitch.basic.vo.SqlAdapter" />
+		
+	</typeAliases>
+	
+	<mappers>  
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/SystemConfigMapper.xml"/>
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/FunctionMapper.xml"/>
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/LinkMapper.xml"/>
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/NodeMapper.xml"/>
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/PolicyMapper.xml"/>
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/AdminMapper.xml"/>
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/PortMapper.xml"/>
+		<mapper resource="com/algoblu/sdwan/linkswitch/common/LinkQualityReportMapper.xml"/>
+		
+    </mappers>
+    
+</configuration>		
+			

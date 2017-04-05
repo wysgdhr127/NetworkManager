@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.algoblu.sdwan.linkswitch.basic.po.SystemConfig">
+
+	<select id="select" parameterType="SystemConfig" resultType="SystemConfig">
+		select		
+		id	id,
+		config_name	configName,
+		config_value	configValue,
+		config_desc	configDesc
+
+		from system_config
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='configName !=null'>
+			   and config_name= #{configName}
+			</if>
+			<if test='configValue !=null'>
+			   and config_value= #{configValue}
+			</if>
+			<if test='configDesc !=null'>
+			   and config_desc= #{configDesc}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+	
+	<select id="count" parameterType="SystemConfig" resultType="int">
+		select count(1) from system_config
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='configName !=null'>
+			   and config_name= #{configName}
+			</if>
+			<if test='configValue !=null'>
+			   and config_value= #{configValue}
+			</if>
+			<if test='configDesc !=null'>
+			   and config_desc= #{configDesc}
+			</if>
+
+		</where>
+	</select>
+
+	<select id="selectByMap" parameterType="HashMap" resultType="SystemConfig">
+		select
+		id	id,
+		config_name	configName,
+		config_value	configValue,
+		config_desc	configDesc
+
+		from system_config
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='configName !=null'>
+			   and config_name= #{configName}
+			</if>
+			<if test='configValue !=null'>
+			   and config_value= #{configValue}
+			</if>
+			<if test='configDesc !=null'>
+			   and config_desc= #{configDesc}
+			</if>
+
+		</where>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+		<if test="limitByClause != null">
+			limit ${limitByClause}
+		</if>
+	</select>
+
+	<update id="update" parameterType="SystemConfig">
+		update system_config
+		<set>
+			<if test='configName !=null'>
+			   config_name= #{configName},
+			</if>
+			<if test='configValue !=null'>
+			   config_value= #{configValue},
+			</if>
+			<if test='configDesc !=null'>
+			   config_desc= #{configDesc},
+			</if>
+		</set>
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</update>
+
+	<insert id="insert" keyProperty="id" useGeneratedKeys="true">
+		insert
+		into system_config(
+			config_name,
+			config_value,
+			config_desc
+
+		)
+		values(
+			#{configName},
+			#{configValue},
+			#{configDesc}
+
+		)
+	</insert>
+
+	<!-- 自定义运行sql -->
+	<update id="runSql" parameterType="SqlAdapter">
+		${sql}
+	</update>
+
+	<delete id="delete" parameterType="SystemConfig">
+		delete from system_config
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='configName !=null'>
+			   and config_name= #{configName}
+			</if>
+			<if test='configValue !=null'>
+			   and config_value= #{configValue}
+			</if>
+			<if test='configDesc !=null'>
+			   and config_desc= #{configDesc}
+			</if>
+
+		</where>
+	</delete>
+
+	<delete id="deleteByMap" parameterType="HashMap">
+		delete from system_config
+		<where>
+			<if test='id !=null'>
+			   and id= #{id}
+			</if>
+			<if test='configName !=null'>
+			   and config_name= #{configName}
+			</if>
+			<if test='configValue !=null'>
+			   and config_value= #{configValue}
+			</if>
+			<if test='configDesc !=null'>
+			   and config_desc= #{configDesc}
+			</if>
+
+		</where>
+	</delete>
+
+
+</mapper>
